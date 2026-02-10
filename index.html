@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Application météo pour consulter la météo en temps réel">
+    <title>Application Météo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Météo en Temps Réel</h1>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Entrez le nom d'une ville..." autocomplete="off">
+            <button id="search-btn">Rechercher</button>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Chargement...</p>
+        </div>
+
+        <div class="error-message" id="error-message">
+            <p></p>
+        </div>
+
+        <div class="weather-container" id="weather-container">
+            <div class="location-info">
+                <h2 id="city-name"></h2>
+                <p id="date-time"></p>
+            </div>
+
+            <div class="weather-main">
+                <div class="temperature-display">
+                    <img id="weather-icon" src="" alt="Icône météo">
+                    <div class="temp-info">
+                        <h1 id="temperature"></h1>
+                        <p id="feels-like"></p>
+                    </div>
+                </div>
+                <p id="weather-description"></p>
+            </div>
+
+            <div class="weather-details">
+                <div class="detail-item">
+                    <span class="detail-icon">💧</span>
+                    <div>
+                        <p class="detail-label">Humidité</p>
+                        <p class="detail-value" id="humidity"></p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">💨</span>
+                    <div>
+                        <p class="detail-label">Vent</p>
+                        <p class="detail-value" id="wind-speed"></p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">🌡️</span>
+                    <div>
+                        <p class="detail-label">Pression</p>
+                        <p class="detail-value" id="pressure"></p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">👁️</span>
+                    <div>
+                        <p class="detail-label">Visibilité</p>
+                        <p class="detail-value" id="visibility"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Propulsé par OpenWeatherMap API</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
