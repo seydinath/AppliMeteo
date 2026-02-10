@@ -5,14 +5,189 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-y: auto;
+}
+
+/* Container d'animations météo */
+.weather-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* Animation soleil */
+@keyframes sunRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+.sun-rays {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    right: 10%;
+    animation: sunRotate 20s linear infinite;
+}
+
+.sun-rays::before {
+    content: '☀️';
+    position: absolute;
+    font-size: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: sunPulse 3s ease-in-out infinite;
+}
+
+/* Animation pluie */
+@keyframes rainFall {
+    0% {
+        top: -10%;
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0.3;
+    }
+}
+
+.rain {
+    position: absolute;
+    width: 2px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(173, 216, 230, 0.6), transparent);
+    animation: rainFall 1s linear infinite;
+}
+
+/* Animation neige */
+@keyframes snowFall {
+    0% {
+        top: -10%;
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes snowSway {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+}
+
+.snow {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    opacity: 0.8;
+    animation: snowFall 4s linear infinite, snowSway 3s ease-in-out infinite;
+}
+
+/* Animation éclairs */
+@keyframes lightning {
+    0%, 10%, 20%, 100% { opacity: 0; }
+    5%, 15% { opacity: 1; }
+}
+
+@keyframes lightningFlash {
+    0%, 9%, 11%, 19%, 21%, 100% { background: transparent; }
+    10%, 20% { background: rgba(255, 255, 255, 0.3); }
+}
+
+.lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: lightningFlash 4s infinite;
+}
+
+.lightning::before {
+    content: '⚡';
+    position: absolute;
+    font-size: 120px;
+    top: 20%;
+    left: 30%;
+    animation: lightning 4s infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.8));
+}
+
+.lightning::after {
+    content: '⚡';
+    position: absolute;
+    font-size: 100px;
+    top: 15%;
+    right: 25%;
+    animation: lightning 4s 2s infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.8));
+}
+
+/* Animation nuages */
+@keyframes cloudMove {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100vw); }
+}
+
+.cloud {
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.6;
+    animation: cloudMove 30s linear infinite;
+}
+
+.cloud:nth-child(2) {
+    top: 20%;
+    animation-duration: 40s;
+    animation-delay: 5s;
+}
+
+.cloud:nth-child(3) {
+    top: 60%;
+    animation-duration: 35s;
+    animation-delay: 10s;
+    font-size: 80px;
+}
+
+/* Animation brouillard */
+@keyframes fogMove {
+    0%, 100% { transform: translateX(-50px); opacity: 0.3; }
+    50% { transform: translateX(50px); opacity: 0.6; }
+}
+
+.fog {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(200, 200, 200, 0.4), transparent);
+    animation: fogMove 8s ease-in-out infinite;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 20px;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: background 1s ease;
 }
 
 /* Conteneur principal */
@@ -24,6 +199,9 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     padding: 30px;
     animation: fadeIn 0.5s ease-in;
+    position: relative;
+    z-index: 10;
+    margin: auto;
 }
 
 @keyframes fadeIn {
@@ -190,6 +368,9 @@ header h1 {
 #weather-icon {
     width: 100px;
     height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .temp-info h1 {

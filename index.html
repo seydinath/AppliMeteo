@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="weather-animation" id="weather-animation"></div>
     <div class="container">
         <header>
             <h1>🌤️ Météo en Temps Réel</h1>
@@ -35,7 +36,7 @@
 
             <div class="weather-main">
                 <div class="temperature-display">
-                    <img id="weather-icon" src="" alt="Icône météo">
+                    <div id="weather-icon"></div>
                     <div class="temp-info">
                         <h1 id="temperature"></h1>
                         <p id="feels-like"></p>
@@ -77,7 +78,7 @@
         </div>
 
         <footer>
-            <p>Propulsé par OpenWeatherMap API</p>
+            <p>Propulsé par Open-Meteo API (gratuite et sans clé)</p>
         </footer>
     </div>
 
